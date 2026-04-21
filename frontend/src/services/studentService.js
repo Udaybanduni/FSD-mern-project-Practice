@@ -1,4 +1,4 @@
-const API_URL = "https://your-backend-url.onrender.com/api/students";
+const API_URL = "https://fsd-mern-project-practice.onrender.com/api/students";
 
 // GET all students
 export const getStudents = async () => {
