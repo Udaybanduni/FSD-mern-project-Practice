@@ -1,8 +1,15 @@
 const API_URL = "https://fsd-mern-project-practice.onrender.com/api/students";
 
+// Helper to get token
+const getToken = () => localStorage.getItem("token");
+
 // GET all students
 export const getStudents = async () => {
-  const res = await fetch(API_URL);
+  const res = await fetch(API_URL, {
+    headers: {
+      Authorization: getToken()
+    }
+  });
   return res.json();
 };
 
@@ -11,7 +18,8 @@ export const createStudent = async (data) => {
   const res = await fetch(API_URL, {
     method: "POST",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      Authorization: getToken()
     },
     body: JSON.stringify(data)
   });
@@ -23,7 +31,8 @@ export const updateStudent = async (id, data) => {
   const res = await fetch(`${API_URL}/${id}`, {
     method: "PUT",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      Authorization: getToken()
     },
     body: JSON.stringify(data)
   });
@@ -33,7 +42,10 @@ export const updateStudent = async (id, data) => {
 // DELETE student
 export const deleteStudent = async (id) => {
   const res = await fetch(`${API_URL}/${id}`, {
-    method: "DELETE"
+    method: "DELETE",
+    headers: {
+      Authorization: getToken()
+    }
   });
   return res.json();
 };

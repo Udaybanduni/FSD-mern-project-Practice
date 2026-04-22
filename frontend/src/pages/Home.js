@@ -7,15 +7,21 @@ function Home() {
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
 
+  // Protect page (redirect if not logged in)
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      window.location.href = "/login";
+    } else {
+      fetchData();
+    }
+  }, []);
+
   // Fetch students
   const fetchData = async () => {
     const data = await getStudents();
     setStudents(data);
   };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
 
   // Delete student
   const handleDelete = async (id) => {
@@ -23,9 +29,20 @@ function Home() {
     fetchData();
   };
 
+  // Logout
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    window.location.href = "/login";
+  };
+
   return (
     <div>
       <h2>All Students</h2>
+
+      {/* Logout */}
+      <button onClick={handleLogout}>Logout</button>
+
+      <br /><br />
 
       {/* Add Button */}
       <button onClick={() => navigate("/add")}>

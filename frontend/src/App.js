@@ -2,7 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import AddStudent from "./pages/AddStudent";
 import EditStudent from "./pages/EditStudent";
-
+import Login from "./pages/Login";
 
 function App() {
   return (
@@ -13,6 +13,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/add" element={<AddStudent />} />
         <Route path="/edit/:id" element={<EditStudent />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </Router>
   );
